@@ -1,0 +1,33 @@
+What are the possible ways to bind component properties to an associated template?
+What kind of classes can you import (meta) in an angular module?
+import { BrowserModule } from '@angular/platform-browser';import { NgModule } from '@angular/core';import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+What are template reference variables and how are they different from variables in classes?
+
+How do you define optional fields in a TypeScript class?
+
+Why are components not marked with @injectable annotation, but services need to be?
+
+What’s the difference between for..in and for..of?
+
+How does the event emitter work in Angular 2? Explain it with pseudo code.
+Why do we need provider aliases? And how do you create one?
+What's the difference between a TypeScript class and an interface?
+What's the expression context in Angular 2? Explain it with an example.
+What are a few subclasses of @Injectable?
+What are HTML attributes and DOM properties; and how are they related?
+What is the NgForTrackBy directive?
+How do you resolve a template URL relative to a Component class?
+How do you use a JavaScript (Non TypeScript) third party lib in an Angular 2 App?
+Can we create two Components with the same name in two different .ts files?
+What types of pipes are supported in Angular 2?
+How would you intercept 404 errors in Angular 2?
+What's the difference between RouterModule.forChild and RouterModule.forRoot?
+How do you create and show pop-up windows in Angular 2?
+Can we import a module twice?
+Can you re-export classes and modules?
+How to make sure that single instance will be used in an entire application?
+How can you connect to remotely deployed backed while in development?
+What’s the difference between a promise and Observable?
+What are different kinds of directives supported in Angular 2?
+How do you reference the host of a component?
