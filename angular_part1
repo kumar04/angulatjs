@@ -1,0 +1,378 @@
+Q.How many way binding is available in angular js?
+one way:(using double braces)
+<p ng-bind="firstname"></p>
+You can also use double braces {{ }} to display content from the model:
+Example
+<p>First name: {{firstname}}</p>
+
+two way:
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<title>
+
+AngularJs Two Binding Example
+
+</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<script type="text/javascript">
+
+var app = angular.module('angulartwobindapp', []);
+
+app.controller('angulartwobindingCtrl', function ($scope) {
+
+$scope.name = 'Welcome to Tutlane.com';
+
+});
+
+</script>
+
+</head>
+
+<body ng-app="angulartwobindapp">
+
+<div ng-controller="angulartwobindingCtrl">
+
+Enter Name : <input type="text" ng-model="name" style="width:250px" />
+
+<p>
+
+Entered Name:   {{ name }}
+
+</p>
+
+</div>
+
+</body>
+
+</html>
+
+Q.what is routing in angular js?
+The ngRoute module helps your application to become a Single Page Application
+If you want to navigate to different pages in your application, but you also want the application to be a SPA (Single Page Application), with no page reloading, you can use the ngRoute module.
+The ngRoute module routes your application to different pages without reloading the entire application.
+
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+<body ng-app="myApp">
+<p><a href="#/!">Main</a></p>
+<a href="#!london">City 1</a>
+<a href="#!paris">City 2</a>
+<p>Click on the links.</p>
+<p>Note that each "view" has its own controller which each gives the "msg" variable a value.</p>
+<div ng-view></div>
+<script>
+var app = angular.module("myApp", ["ngRoute"]);
+app.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "main.htm",
+    })
+    .when("/london", {
+        templateUrl : "london.htm",
+        controller : "londonCtrl"
+    })
+    .when("/paris", {
+        templateUrl : "paris.htm",
+        controller : "parisCtrl"
+    });
+});
+app.controller("londonCtrl", function ($scope) {
+    $scope.msg = "I love London";
+});
+app.controller("parisCtrl", function ($scope) {
+    $scope.msg = "I love Paris";
+});
+
+</script>
+
+</body>
+</html>
+
+Q.if you change something in your angular file then what is the step to run your application after that your latest change codes are
+reflect?
+<executions>
+            <execution>
+                <id>exec-npm-install</id>
+                <phase>generate-sources</phase>
+                <configuration>     
+<workingDirectory>${project.basedir}/src/main/ngapp</workingDirectory>
+                    <executable>npm</executable>
+                    <arguments>
+                        <argument>install</argument>
+                    </arguments>
+                </configuration>
+                <goals>
+                    <goal>exec</goal>
+                </goals>
+            </execution>
+            <execution>
+                <id>exec-npm-ng-build</id>
+                <phase>generate-sources</phase>
+                <configuration>
+                    <workingDirectory>${project.basedir}/src/main/ngapp</workingDirectory>
+                    <executable>ng</executable>
+                    <arguments>
+                        <argument>build</argument>
+                        <argument>--base-href=/ngfirst/ng/</argument>
+                    </arguments>
+                </configuration>
+                <goals>
+                    <goal>exec</goal>
+                </goals>
+            </execution>
+        </executions>
+inside the pom.xml ,write dependency of angular js
+Q.what is ngInit vs onngInit vs constructor methods in angular js?
+ngOnInit is a life cycle hook called by Angular2 to indicate that Angular is done creating the component.
+
+We have to import OnInit in order to use like this (actually implementing OnInit is not mandatory but considered good practice):
+// this is called by the JavaScript engine
+  // rather than Angular
+  constructor() {
+    console.log('Constructor initialised');
+  }
+  
+  import { Component, OnInit } from '@angular/core';
+
+@Component({})
+class ExampleComponent implements OnInit {
+  constructor() {}
+
+  // called on demand by Angular
+  ngOnInit() {
+    console.log('ngOnInit fired');
+  }
+}
+
+const instance = new ExampleComponent();
+
+// Angular calls this when necessary
+instance.ngOnInit();
+Q.tell me angular js flow?
+easily create multiple angular modules in your project
+each module can have it's own states, components, services, directives, modals, filters etc.
+angular-flow components are inspired by web components so they group .js, .html, .scss files in one place.
+easy create nested ui-router states in modules
+use scripts for running dev server with live reload or for building for production
+Q.how to test your angular js?
+What is this?
+An example of how you can test your AngularJS providers.
+
+Relevant files
+sampleProvider.js - A very simple configurable provider.
+sampleProvider_spec.js - Some tests for the provider that should give you an idea of how you might test your real provider
+How to run
+npm install
+bower install
+karma start karma.conf.js
+Links
+Plunker that runs the tests on the browser.
+Gist that runs tests with Karma.
+ AngularJS Provider Test Example
+Look at the README.
+ bower.json
+{
+    "name": "sampleProvider Test Pattern",
+    "version": "1.0.0",
+    "dependencies": {
+        "angular": "~1.2.0"
+    },
+    "devDependencies": {
+        "angular-mocks": "~1.2.0",
+        "angular-scenario": "~1.2.0"
+    }
+}
+ karma.conf.js
+module.exports = function(config) {
+  'use strict';
+  config.set({
+
+    // base path, that will be used to resolve files and exclude
+    basePath: '',
+
+    frameworks: ['jasmine'],
+
+    plugins: [
+      'karma-jasmine',
+      'karma-phantomjs-launcher'
+    ],
+
+    // list of files / patterns to load in the browser
+    files: [
+      'bower_components/angular/angular.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'sampleProvider.js',
+      'sampleProvider_spec.js'
+    ],
+
+
+    // list of files to exclude
+    exclude: [],
+
+
+    // test results reporter to use
+    // possible values: 'dots', 'progress', 'junit'
+    reporters: ['progress'],
+
+
+    // web server port
+    port: 9876,
+
+
+    // cli runner port
+    runnerPort: 9100,
+
+
+    // enable / disable colors in the output (reporters and logs)
+    colors: true,
+
+
+    // level of logging
+    // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
+    logLevel: config.LOG_INFO,
+
+
+    // enable / disable watching file and executing tests whenever any file changes
+    autoWatch: true,
+
+
+    // Start these browsers, currently available:
+    // - Chrome
+    // - ChromeCanary
+    // - Firefox
+    // - Opera
+    // - Safari (only Mac)
+    // - PhantomJS
+    // - IE (only Windows)
+    browsers: ['PhantomJS'],
+
+
+    // If browser does not capture in given timeout [ms], kill it
+    captureTimeout: 60000,
+
+
+    // Continuous Integration mode
+    // if true, it capture browsers, run tests and exit
+    singleRun: true
+
+  });
+};
+
+ package.json
+{
+  "name": "sampleProvider",
+  "description": "Shows an example of how you can test your AngularJS providers.",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "karma": "~0.10",
+    "karma-jasmine": "~0.1",
+    "karma-phantomjs-launcher": "~0.1.1"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}
+ sampleProvider.js
+angular
+  .module('sample', [])
+  .provider('sample', function() {
+    'use strict';
+
+    var value = 'Default Value';
+
+    this.setValue = function(val) {
+      value = val;
+    };
+
+    this.$get = function() {
+
+      var getValue = function() {
+        return value;
+      };
+
+      var throwValue = function() {
+        throw new Error(value);
+      };
+
+      return {
+        getValue: getValue,
+        throwValue: throwValue
+      };
+
+    };
+
+  });
+ sampleProvider_spec.js
+describe('sampleProvider', function() {
+  'use strict';
+
+  // Provider instance
+  var sample;
+
+  // Instanciates the module
+  beforeEach(function() {
+    module('sample');
+  });
+
+  // Here we don't do any configuration to our provider
+  describe('Default Configuration', function() {
+
+    beforeEach(function() {
+      inject(function(_sample_) {
+        sample = _sample_;
+      });
+    });
+
+    it('Should get the default value', function() {
+      expect(sample.getValue()).toBe('Default Value');
+    });
+
+    it('Should throw the default value', function() {
+      expect(function() {
+        sample.throwValue();
+      }).toThrow('Default Value');
+    });
+  
+  });
+
+  // Here we do some configuration
+  describe('Configuration A', function() {
+
+    // Configure the provider and instanciate it
+    beforeEach(function() {
+      module(function(sampleProvider) {
+        sampleProvider.setValue('A');
+      });
+
+      inject(function(_sample_) {
+        sample = _sample_;
+      });
+    });
+
+    it('Should get the configured value', function() {
+      expect(sample.getValue()).toBe('A');
+    });
+
+    it('Should throw the configured value', function() {
+      expect(function() {
+        sample.throwValue();
+      }).toThrow('A');
+    });
+
+  });
+
+});
+Q.how to create your angular file ?is there any command for this requirement?list of file name
+ng g component my-new-component
+.html
+.css
+.ts
